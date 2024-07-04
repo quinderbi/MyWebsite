@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {},
     fontFamily: {
-      'rubik' : ['Rubik', 'sans-serif'],
+      'sans': ['Plus Jakarta Sans, sans-serif'],
     },
   },
   plugins: [],

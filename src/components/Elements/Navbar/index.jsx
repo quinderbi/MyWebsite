@@ -1,11 +1,12 @@
 import React from 'react'
+import NavButton from './NavButton'
 
 const pages = [
-  {name: 'About', path: '/about'},
-  {name: 'Resume', path: '/resume'},
-  {name: 'Contact', path: '/contact'},
-  {name: 'Project', path: '/project'},
-  {name: 'Blog', path: '/blog'},
+  {name: 'About', path: '/'},
+  {name: 'Resume', path: '/'},
+  {name: 'Contact', path: '/'},
+  {name: 'Project', path: '/'},
+  {name: 'Blog', path: '/'},
 ]
 
 const ItemPage = ({name, path}) => {
@@ -16,34 +17,37 @@ const ItemPage = ({name, path}) => {
   )
 }
 
-
 const Navbar = () => {
   return (
     <>
-    <button className="absolute right-0 mx-5 my-7" id="open">
-      <svg className="w-6 h-6 justify-self-end" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M0 2 14 2M0 7 14 7M0 12 14 12"/>
-      </svg>
-    </button>
-    <div id="sidebar" className="absolute flex flex-col justify-between p-5 bg-white min-h-screen border-t-8 border-orange-700 w-full max-w-md -translate-x-full duration-300">
+    <NavButton
+      type="humberger" 
+      onClick={() => {
+        document.getElementById('sidebar').classList.toggle('-translate-x-full')
+      }}
+      className="fixed right-0 m-7"
+    />
+    <div id="sidebar" className="fixed flex flex-col justify-between p-5 backdrop-blur-md min-h-screen border-t-8 border-r border-r-slate-100 border-orange-600 w-full max-w-md -translate-x-full duration-300 delay-400 ease-in-out">
       <div className="grid grid-cols-7 gap-4 ">
         <div className='col-span-3'><p>Social Platform</p></div>
         <div className='grid col-span-3'>
-            <span>Instagram</span>
-            <span>Linkedin</span>
-            <span>Github</span>
+            <span><a href="https://www.instagram.com/quinderbi_/" >Instagram</a></span>
+            <span><a href="https://www.linkedin.com/in/quinderbi/" >Linkedin</a></span>
+            <span><a href="https://github.com/quinderbi" >Github</a></span>
         </div>
-        <button className="h-fit " id="close-sidebar">
-          <svg className="w-6 h-6 justify-self-end" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M0 0 14 14M7 7 7 7M0 14 14 0"/>
-          </svg>
-        </button>
+        <NavButton
+          type="close" 
+          onClick={() => {
+            document.getElementById('sidebar').classList.add('-translate-x-full')
+          }}
+          className="justify-self-end"
+        />
       </div>
-      <ul className='flex flex-col justify-center'>
-        {pages.map((page, index) => (
-          <ItemPage key={index} {...page} />
-        ))}
-      </ul>
+        <ul className='flex flex-col justify-center'>
+          {pages.map((page, index) => (
+            <ItemPage key={index} {...page} />
+          ))}
+        </ul>
       <p className='text-sm text-center'>©2024 Quin Derbi.<br />All rights reserved.</p>
     </div>
     </>
